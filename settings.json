@@ -1,0 +1,25 @@
+{
+    "input_file": "/Users/weishanshan/Downloads/LyricsMaker/song.txt",
+    "output_folder": "/Users/weishanshan/Downloads/LyricsMaker/output/",
+    "background": {
+        "width": 1920,
+        "height": 1080
+    },
+    "textbox": {
+        "width": 1900,
+        "height": 1000
+    },
+    "font": {
+        "chinese": "Microsoft YaHei",
+        "english": "Arial"
+    },
+    "title": {
+        "chinese_size": 170,
+        "english_size": 100
+    },
+    "lyric": {
+        "chinese_size": 140,
+        "english_size": 70
+    },
+    "lyric_file": "/Users/weishanshan/Downloads/LyricsMaker/song.txt"
+}
