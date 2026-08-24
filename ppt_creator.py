@@ -98,6 +98,15 @@ def add_text_slide(
         prs.slide_layouts[6]
     )
 
+    # ==========================
+    # 添加备注
+    # ==========================
+
+    add_slide_notes(
+        slide,
+        chinese
+    )
+
     slide.background.fill.background()
 
     x = Inches(
@@ -218,6 +227,12 @@ def add_text_slide(
     font2.size = Pt(english_font_size)
     font2.bold = False
     font2.color.rgb = RGBColor(255,255,255)
+
+def add_slide_notes(slide, note):
+    notes_frame = slide.notes_slide.notes_text_frame
+
+    if notes_frame is not None:
+        notes_frame.text = note
 
 def add_lyric_slide(prs, chinese, english):
 

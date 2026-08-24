@@ -1,6 +1,6 @@
 {
-    "input_file": "/Users/weishanshan/Downloads/LyricsMaker/song.txt",
-    "output_folder": "/Users/weishanshan/Downloads/LyricsMaker/output/",
+    "input_file": "",
+    "output_folder": "",
     "background": {
         "width": 1920,
         "height": 1080
@@ -21,5 +21,5 @@
         "chinese_size": 140,
         "english_size": 70
     },
-    "lyric_file": "/Users/weishanshan/Downloads/LyricsMaker/song.txt"
+    "lyric_file": ""
 }
