@@ -1,30 +1,23 @@
 def read_lyrics(filename):
 
-    with open(filename,"r",encoding="utf-8") as f:
-        lines=f.readlines()
+    with open(filename, "r", encoding="utf-8") as f:
+        lines = f.readlines()
 
+    title_cn = ""
+    title_en = ""
 
-    title_cn=""
-    title_en=""
+    slides = []
 
-    groups=[]
+    temp = []
 
-    current_group=None
-
-    temp=[]
-
-
-    title_count=0
-
+    title_count = 0
 
     for line in lines:
 
-        line=line.strip()
-
+        line = line.strip()
 
         if not line:
             continue
-
 
         # =================
         # 标题
@@ -35,31 +28,12 @@ def read_lyrics(filename):
             title_count += 1
 
             if title_count == 1:
-                title_cn=line[1:].strip()
+                title_cn = line[1:].strip()
 
             elif title_count == 2:
-                title_en=line[1:].strip()
+                title_en = line[1:].strip()
 
             continue
-
-
-
-        # =================
-        # Group
-        # =================
-
-        if line.startswith("[") and line.endswith("]"):
-
-            current_group={
-                "name":line[1:-1],
-                "slides":[]
-            }
-
-            groups.append(current_group)
-
-            continue
-
-
 
         # =================
         # 中英歌词
@@ -67,39 +41,21 @@ def read_lyrics(filename):
 
         temp.append(line)
 
+        if len(temp) == 2:
 
-        if len(temp)==2:
+            slides.append({
+                "chinese": temp[0],
+                "english": temp[1]
+            })
 
-            if len(temp) == 2:
-
-                if current_group is None:
-                    current_group = {
-                        "name": "Default",
-                        "slides": []
-                    }
-
-                    groups.append(current_group)
-
-                current_group["slides"].append({
-
-                    "chinese": temp[0],
-                    "english": temp[1]
-
-                })
-
-                temp = []
-
-
+            temp = []
 
     return {
-
-        "title_cn":title_cn,
-
-        "title_en":title_en,
-
-        "groups":groups
-
+        "title_cn": title_cn,
+        "title_en": title_en,
+        "slides": slides
     }
+
 
 def clean_filename(name):
 

@@ -6,10 +6,6 @@ from config import SETTINGS
 from parser import read_lyrics
 import os
 
-# 文件名设置
-INPUT_FILE = SETTINGS["input_file"]
-OUTPUT_DIR = SETTINGS["output_folder"]
-
 # ==========================
 # 内部转换参数 (勿动)
 # ==========================
@@ -245,26 +241,6 @@ def add_lyric_slide(prs, chinese, english):
         True
     )
 
-def add_group_slide(prs, group_name):
-
-    slide = prs.slides.add_slide(
-        prs.slide_layouts[6]
-    )
-
-    box = slide.shapes.add_textbox(
-        Inches(0),
-        Inches(0),
-        Inches(px_to_inches(SETTINGS["background"]["width"])),
-        Inches(px_to_inches(SETTINGS["background"]["height"]))
-    )
-
-    frame = box.text_frame
-
-    p = frame.paragraphs[0]
-
-    p.text = group_name
-
-    p.font.size = Pt(1)
 
 def add_title_slide(prs, chinese, english):
 
@@ -299,19 +275,18 @@ def create_presentation(
         lyrics["title_en"]
     )
 
-    # Group + Lyrics
+    # Lyrics
 
-    for group in lyrics["groups"]:
+    for page in lyrics["slides"]:
 
-        for page in group["slides"]:
-            add_lyric_slide(
-                prs,
-                page["chinese"],
-                page["english"]
-            )
+        add_lyric_slide(
+            prs,
+            page["chinese"],
+            page["english"]
+        )
 
     os.makedirs(
-        OUTPUT_DIR,
+        output_file,
         exist_ok=True
     )
 

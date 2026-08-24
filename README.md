@@ -29,17 +29,11 @@ v0.0.1
 #中文歌名
 #English Title
 
-[Verse]
-
 中文歌词
 English lyrics
 
-[Bridge]
-
 中文歌词
 English lyrics
-
-[Chorus]
 
 中文歌词
 English lyrics
