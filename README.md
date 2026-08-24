@@ -8,7 +8,7 @@ presentations for ProPresenter and PowerPoint.
 
 ## Current Version
 
-v0.1.0
+v0.0.1
 
 ## Features
 
