@@ -26,13 +26,15 @@ v0.1.0
 ## Input Format
 
 ```text
-#Chinese Title
+#中文歌名
 #English Title
 
 [Verse]
 
 中文歌词
 English lyrics
+
+[Bridge]
 
 中文歌词
 English lyrics
