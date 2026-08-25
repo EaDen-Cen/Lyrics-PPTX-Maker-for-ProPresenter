@@ -19,7 +19,7 @@ It is designed primarily for Chinese-English worship lyrics and is intended for 
 - Automatically calculate vertical text offset
 - Automatically generate output filenames
 - Support 16:9 presentations
-- Local configuration through `settings.json`
+- Default Local configuration through `settings.example.json`
 
 ## How It Works
 
