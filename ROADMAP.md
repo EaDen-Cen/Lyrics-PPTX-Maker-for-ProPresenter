@@ -10,8 +10,8 @@
 
 ### v0.2 — Data Structure
 - [ ] JSON lyric format
-- [ ] Better lyric data model
-- [ ] Separate parser and layout engine
+- [x] Better lyric data model
+- [x] Separate parser and layout engine
 - [ ] More robust input validation
 
 ### v0.3 — Automatic Layout
