@@ -8,14 +8,13 @@ presentations for ProPresenter and PowerPoint.
 
 ## Current Version
 
-v0.0.1
+v0.1.0
 
 ## Features
 
 - Parse bilingual Chinese-English lyrics from TXT files
 - Automatically generate PPTX lyric slides
 - Generate a title slide
-- Support lyric groups such as `[Verse]`, `[Chorus]`, `[Bridge]`
 - Customize Chinese and English fonts
 - Customize Chinese and English font sizes
 - Automatically calculate vertical text offset

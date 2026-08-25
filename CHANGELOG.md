@@ -12,8 +12,7 @@ The format is based on Semantic Versioning.
 
 - Added TXT lyric file parsing.
 - Added Chinese-English bilingual lyric support.
-- Added song title parsing using `#`.
-- Added lyric group parsing using `[Group]`.
+- Added song title parsing using `#`. 
 - Added automatic title slide generation.
 - Added bilingual lyric slide generation.
 - Added independent Chinese and English font settings.
