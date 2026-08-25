@@ -21,7 +21,6 @@ It is designed primarily for Chinese-English worship lyrics and is intended for 
 - Support 16:9 presentations
 - Local configuration through `settings.json`
 
-```markdown
 ## How It Works
 
 ```text
@@ -36,8 +35,8 @@ TXT Lyrics File
       ├── PowerPoint
       │
       └── ProPresenter
-
 ```
+
 LyricsMaker reads a structured TXT file containing Chinese and English lyrics and converts it into a formatted PPTX presentation.
 
 ## Input Format
@@ -140,4 +139,3 @@ Future versions may expand the lyric data structure, presentation controls, and 
 ## License
 
 This project is currently not licensed for redistribution.
-```
