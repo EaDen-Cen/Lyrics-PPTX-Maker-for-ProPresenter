@@ -11,5 +11,5 @@ def generate(lyric, output, title):
         output_file
     )
 
-
-run(generate)
+if __name__ == "__main__":
+    run(generate)

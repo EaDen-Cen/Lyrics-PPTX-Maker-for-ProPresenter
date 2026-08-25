@@ -30,6 +30,7 @@ def run(create_callback=None):
 
     lyric_edit = QLineEdit()
     lyric_edit.setText(SETTINGS["input_file"])
+    lyric_edit.setReadOnly(True)
 
     lyric_button = QPushButton("浏览")
 
@@ -45,6 +46,7 @@ def run(create_callback=None):
 
     output_edit = QLineEdit()
     output_edit.setText(SETTINGS["output_folder"])
+    output_edit.setReadOnly(True)
 
     output_button = QPushButton("浏览")
 

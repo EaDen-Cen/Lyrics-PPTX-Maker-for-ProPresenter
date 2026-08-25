@@ -1,3 +1,5 @@
+import os
+
 def read_lyrics(filename):
 
     with open(filename, "r", encoding="utf-8") as f:
@@ -53,6 +55,7 @@ def read_lyrics(filename):
     return {
         "title_cn": title_cn,
         "title_en": title_en,
+        "filename": os.path.basename(filename),
         "slides": slides
     }
 
@@ -74,9 +77,13 @@ def clean_filename(name):
 def get_default_filename(lyrics):
 
     title_cn = lyrics["title_cn"]
+    filename = lyrics["filename"]
 
     if title_cn:
         filename = title_cn
+
+    elif filename:
+        filename = filename
 
     else:
         filename = "Untitled Song"
