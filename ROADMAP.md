@@ -13,6 +13,7 @@
 - [x] Better lyric data model
 - [x] Separate parser and layout engine
 - [ ] More robust input validation
+- [ ] Multi-Language switching
 
 ### v0.3 — Automatic Layout
 - [ ] Text width measurement
