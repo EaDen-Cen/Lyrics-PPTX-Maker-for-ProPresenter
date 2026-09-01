@@ -262,8 +262,6 @@ def create_presentation(
 
     prs = Presentation()
 
-    prs.save(output_file)
-
     # 设置 16:9
     prs.slide_width = Inches(px_to_inches(SETTINGS["background"]["width"]))
     prs.slide_height = Inches(px_to_inches(SETTINGS["background"]["height"]))
@@ -286,10 +284,9 @@ def create_presentation(
             page["english"]
         )
 
-    os.makedirs(
-        output_file,
-        exist_ok=True
-    )
+    output_directory = os.path.dirname(output_file)
+    if output_directory:
+        os.makedirs(output_directory, exist_ok=True)
 
     prs.save(output_file)
 
