@@ -1,56 +1,53 @@
 import os
 
+
+class LyricsFormatError(ValueError):
+    """Raised when a lyric file does not follow the supported TXT format."""
+
 def read_lyrics(filename):
 
-    with open(filename, "r", encoding="utf-8") as f:
-        lines = f.readlines()
+    if not filename:
+        raise LyricsFormatError("请选择歌词文件")
 
-    title_cn = ""
-    title_en = ""
+    if not os.path.isfile(filename):
+        raise LyricsFormatError("歌词文件不存在")
 
-    slides = []
+    if os.path.splitext(filename)[1].lower() != ".txt":
+        raise LyricsFormatError("歌词文件必须是 TXT 格式")
 
-    temp = []
+    try:
+        with open(filename, "r", encoding="utf-8") as f:
+            lines = [line.strip() for line in f if line.strip()]
+    except UnicodeDecodeError as exc:
+        raise LyricsFormatError("歌词文件必须使用 UTF-8 编码") from exc
 
-    title_count = 0
+    if len(lines) < 4:
+        raise LyricsFormatError("歌词文件至少需要中英文标题和一组中英文歌词")
 
-    for line in lines:
+    if not lines[0].startswith("#") or not lines[1].startswith("#"):
+        raise LyricsFormatError("歌词文件前两行必须是以 # 开头的中英文标题")
 
-        line = line.strip()
+    title_cn = lines[0][1:].strip()
+    title_en = lines[1][1:].strip()
 
-        if not line:
-            continue
+    if not title_cn or not title_en:
+        raise LyricsFormatError("中英文标题不能为空")
 
-        # =================
-        # 标题
-        # =================
+    lyric_lines = lines[2:]
 
-        if line.startswith("#"):
+    if any(line.startswith("#") for line in lyric_lines):
+        raise LyricsFormatError("歌词文件只能包含两个以 # 开头的标题")
 
-            title_count += 1
+    if len(lyric_lines) % 2 != 0:
+        raise LyricsFormatError("中英文歌词没有完整配对，请检查最后一行")
 
-            if title_count == 1:
-                title_cn = line[1:].strip()
-
-            elif title_count == 2:
-                title_en = line[1:].strip()
-
-            continue
-
-        # =================
-        # 中英歌词
-        # =================
-
-        temp.append(line)
-
-        if len(temp) == 2:
-
-            slides.append({
-                "chinese": temp[0],
-                "english": temp[1]
-            })
-
-            temp = []
+    slides = [
+        {
+            "chinese": lyric_lines[index],
+            "english": lyric_lines[index + 1]
+        }
+        for index in range(0, len(lyric_lines), 2)
+    ]
 
     return {
         "title_cn": title_cn,
@@ -68,26 +65,32 @@ def clean_filename(name):
     for c in invalid_chars:
         name = name.replace(c, "")
 
-    # 防止文件名太长
-    name = name.strip()
+    # Windows 不允许文件名以空格或句点结尾
+    name = name.strip().rstrip(".")
 
     return name
 
 
 def get_default_filename(lyrics):
 
-    title_cn = lyrics["title_cn"]
-    filename = lyrics["filename"]
+    return get_output_filename(lyrics)
 
-    if title_cn:
-        filename = title_cn
 
-    elif filename:
-        filename = filename
+def get_output_filename(lyrics, requested_title=""):
 
+    if requested_title:
+        filename = requested_title.strip()
+
+        if filename.lower().endswith(".pptx"):
+            filename = filename[:-5]
     else:
-        filename = "Untitled Song"
+        title_cn = lyrics.get("title_cn", "")
+        source_filename = lyrics.get("filename", "")
+        filename = title_cn or os.path.splitext(source_filename)[0] or "Untitled Song"
 
     filename = clean_filename(filename)
+
+    if not filename:
+        raise ValueError("PPT 名称不能只包含文件名非法字符")
 
     return filename + ".pptx"

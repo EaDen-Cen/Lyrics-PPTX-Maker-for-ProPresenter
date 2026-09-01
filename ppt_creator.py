@@ -3,7 +3,6 @@ from pptx.util import Inches, Pt
 from pptx.enum.text import PP_ALIGN
 from pptx.dml.color import RGBColor
 from config import SETTINGS
-from parser import read_lyrics
 import os
 
 # ==========================
@@ -255,11 +254,9 @@ def add_title_slide(prs, chinese, english):
     )
 
 def create_presentation(
-        input_file,
+        lyrics,
         output_file
 ):
-    lyrics = read_lyrics(input_file)
-
     prs = Presentation()
 
     # 设置 16:9

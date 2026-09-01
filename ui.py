@@ -61,7 +61,7 @@ def run(create_callback=None):
     ppt_label = QLabel("PPT名称")
 
     ppt_edit = QLineEdit()
-    ppt_edit.setPlaceholderText("留空则默认输出Untitled Music")
+    ppt_edit.setPlaceholderText("留空则使用歌词文件中的中文歌名")
 
     # ======================
     # 开始生成
@@ -144,29 +144,58 @@ def run(create_callback=None):
             QMessageBox.warning(window, "提示", "请选择导出路径")
             return
 
-        if not title:
-            title = "Untitled Music"
-
         try:
 
-            if create_callback:
-                create_callback(
-                    lyric,
-                    output,
-                    title
-                )
+            if not create_callback:
+                raise RuntimeError("未配置 PPT 生成器")
+
+            output_file = create_callback(
+                lyric,
+                output,
+                title
+            )
 
             QMessageBox.information(
                 window,
                 "完成",
-                "PPT 已生成！(∠・ω< )⌒★"
+                f"PPT 已生成！(∠・ω< )⌒★\n\n{output_file}"
             )
+
+        except FileExistsError as e:
+
+            answer = QMessageBox.question(
+                window,
+                "文件已存在",
+                f"以下文件已经存在：\n{e.args[0]}\n\n是否覆盖？",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                QMessageBox.StandardButton.No
+            )
+
+            if answer == QMessageBox.StandardButton.Yes and create_callback:
+                try:
+                    output_file = create_callback(
+                        lyric,
+                        output,
+                        title,
+                        True
+                    )
+                    QMessageBox.information(
+                        window,
+                        "完成",
+                        f"PPT 已覆盖保存！(∠・ω< )⌒★\n\n{output_file}"
+                    )
+                except Exception as overwrite_error:
+                    QMessageBox.critical(
+                        window,
+                        "导出失败",
+                        str(overwrite_error)
+                    )
 
         except Exception as e:
 
             QMessageBox.critical(
                 window,
-                "发生未知错误",
+                "导出失败",
                 str(e)
             )
 

@@ -12,7 +12,7 @@
 - [ ] JSON lyric format
 - [x] Better lyric data model
 - [x] Separate parser and layout engine
-- [ ] More robust input validation
+- [x] More robust input validation
 - [ ] Multi-Language switching
 
 ### v0.3 — Automatic Layout
@@ -23,11 +23,15 @@
 - [ ] Manual layout overrides
 
 ### v0.4 — GUI
-- [ ] Graphical interface
-- [ ] File selection
+- [x] Graphical interface
+- [x] File selection
 - [ ] Parameter editor
 - [ ] Preview
 - [ ] Export settings
+
+Basic PPT naming, output-directory selection, overwrite confirmation, and
+error reporting are implemented. Full parameter and export-setting editors are
+still planned.
 
 ### v0.5 — Lyric Editor
 - [ ] Create lyrics inside LyricsMaker

@@ -17,9 +17,11 @@ It is designed primarily for Chinese-English worship lyrics and is intended for 
 - Customize Chinese and English fonts
 - Customize Chinese and English font sizes
 - Automatically calculate vertical text offset
-- Automatically generate output filenames
+- Automatically generate output filenames from the Chinese song title
+- Validate lyric titles, bilingual line pairs, file format, and output paths
+- Ask for confirmation before overwriting an existing presentation
 - Support 16:9 presentations
-- Default Local configuration through `settings.example.json`
+- Store user-specific settings locally through `settings.json`
 
 ## How It Works
 
@@ -62,17 +64,21 @@ The first # line is used as the Chinese title, while the second # line is used a
 
 Each Chinese lyric line should be followed by its corresponding English lyric line.
 
+LyricsMaker validates this structure before export. The file must use UTF-8
+encoding, contain two non-empty titles, and contain a complete English line for
+every Chinese lyric line.
+
 ## Installation
 
 ### Requirements
 
-·Python 3.10 or newer
-·python-pptx
-·PySide6
+- Python 3.10 or newer
+- python-pptx
+- PySide6
 
 Install the required packages with:
 
-```text
+```bash
 pip install python-pptx PySide6
 ```
 
@@ -80,11 +86,13 @@ pip install python-pptx PySide6
 
 Run the application with:
 
-```text
+```bash
 python main.py
 ```
 
-Select a TXT lyric file through the application and generate the corresponding PPTX presentation.
+Select a TXT lyric file and an output directory through the application. You
+may enter a custom PPT name or leave it empty to use the Chinese song title.
+If the target file already exists, LyricsMaker asks before replacing it.
 
 ### Configuration
 
@@ -96,7 +104,8 @@ A default configuration template is provided as:
 settings.example.json
 ```
 
-Copy the example configuration to settings.json before running the application for the first time.
+If `settings.json` does not exist, LyricsMaker automatically copies the default
+configuration from `settings.example.json` when it starts.
 
 settings.json is intended to remain local and is not synchronized through Git.
 
@@ -111,6 +120,7 @@ Lyrics-PPTX-Maker-for-ProPresenter/
 ├── ppt_creator.py          # PPTX generation
 ├── config.py               # Configuration handling
 ├── settings.example.json   # Default configuration template
+├── tests/                  # Parser and PPTX generation tests
 │
 ├── README.md
 ├── CHANGELOG.md
@@ -132,7 +142,19 @@ LyricsMaker is currently in early development.
 
 Version 0.1 focuses on the core workflow:
 
-|  Structured lyrics → formatted PPTX
+> Structured lyrics → validated lyric model → formatted PPTX
+
+The project currently includes a basic PySide6 interface for file selection,
+output naming, export, overwrite confirmation, and error reporting. Automatic
+layout, in-app lyric editing, previews, and standalone builds are still planned.
+
+## Testing
+
+Run the automated test suite with:
+
+```bash
+python -m unittest discover -s tests -v
+```
 
 Future versions may expand the lyric data structure, presentation controls, and ProPresenter workflow.
 
