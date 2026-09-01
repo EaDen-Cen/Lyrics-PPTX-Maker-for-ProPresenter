@@ -19,6 +19,7 @@ The format is based on Semantic Versioning.
 - This is a patch release and does not change the lyric input format or slide layout behavior.
 
 ---
+
 ## [0.1.0] - 2026-08-24
 
 ### Added
