@@ -6,7 +6,7 @@ It is designed primarily for Chinese-English worship lyrics and is intended for 
 
 ## Current Version
 
-**v0.1.0**
+**v0.1.1**
 
 ## Features
 
