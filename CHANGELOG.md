@@ -6,6 +6,19 @@ The format is based on Semantic Versioning.
 
 ---
 
+## [0.1.1] - 2026-09-01
+
+### Fixed
+
+- Fixed a PPTX export failure caused by saving the output file before presentation generation was complete.
+- Fixed output path handling that incorrectly treated the `.pptx` file path as a directory.
+- Ensured the output directory is created only when necessary and the completed presentation is saved once.
+
+### Notes
+
+- This is a patch release and does not change the lyric input format or slide layout behavior.
+
+---
 ## [0.1.0] - 2026-08-24
 
 ### Added
